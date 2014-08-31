@@ -16,7 +16,13 @@
 
 
 table, th, td {
-   border: 1px solid black;
-   text-align: center;
-   padding: 3px;
+   border: 1px solid black !important;
+   text-align: center !important;
+   padding: 3px !important;
 } 
+
+a {
+	color: black !important;
+}
+
+

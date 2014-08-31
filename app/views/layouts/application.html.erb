@@ -3,12 +3,29 @@
 <head>
   <title>FcastApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'highcharts', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!-- <div class="navbar-wrapper">
+	<div class="container">
+		<div class="navbar navbar-inverse navbar-static-top"> -->
+			<div class="container">
+				<div class="row">
+					<%= yield %>
+			   <!--  </div>
+			 </div>
+		</div>
+	</div> -->
+</div>
 
-<%= yield %>
 
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 </body>
 </html>

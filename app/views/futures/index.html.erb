@@ -1,9 +1,8 @@
-<table>
+<table class="col-md-11">
   <thead>
     <tr>
       <th>Future Year</th>
       <th>Forcasted Value</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -12,9 +11,8 @@
       <tr>
         <td><%= future.future_year %></td>
         <td><%= future.forcasted %></td>
-        <td><%= link_to 'Show', future %></td>
-        <td><%= link_to 'Edit', edit_future_path(future) %></td>
-        <td><%= link_to 'Destroy', future, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Modify', edit_future_path(future), :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Delete', future, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,6 +20,6 @@
 
 <br>
 
-<%= link_to 'New Future Data', new_future_path %>
+<%= link_to 'New Future Data', new_future_path, :class => "col-md-2 btn btn-success" %>
 
 

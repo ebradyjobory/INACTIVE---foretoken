@@ -1,5 +1,25 @@
 class Forecast < ActiveRecord::Base
 
+	def self.revenues
+		revenues = []
+		forecasts = Forecast.all
+		forecasts.each do |i|
+			revenues << i.revenue
+		end
+		revenues
+	end
+
+	def self.years
+		years = []
+		forecasts = Forecast.all
+		forecasts.each do |i|
+			years << i.year
+		end
+		years
+	end
+
+
+
 	def mean
 		forecasts = Forecast.all
 		revenues = []
