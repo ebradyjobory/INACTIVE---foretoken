@@ -113,7 +113,11 @@ $(document).ready(function() {
             }
         },
         series: [{
-            data: <%= Forecast.revenues.each { |i| i.inspect} %>
+            name: "Input",
+            data: <%= Forecast.revenues.each { |i| i.inspect} %>,
+            }, {
+            name: "Forcasted",
+            data: <%= Future.years.each { |i| i.inspect } %> 
         }]
     });
 });

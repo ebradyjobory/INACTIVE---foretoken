@@ -1,5 +1,14 @@
 class Future < ActiveRecord::Base
 
+	def self.years
+		future_years = []
+		futures = Future.all
+		futures.each do |i|
+			future_years << i.forcasted
+		end
+		future_years	
+	end
+
 
 	def mean
 		forecasts = Forecast.all
