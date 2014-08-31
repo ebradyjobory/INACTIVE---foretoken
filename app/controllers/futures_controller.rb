@@ -5,6 +5,11 @@ class FuturesController < ApplicationController
   # GET /futures.json
   def index
     @futures = Future.all
+
+    @forecasts = Forecast.all
+    @last_data = @forecasts.last
+    @last_id =  @last_data.id
+
   end
 
   # GET /futures/1

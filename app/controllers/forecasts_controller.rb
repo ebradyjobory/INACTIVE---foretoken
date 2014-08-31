@@ -5,6 +5,7 @@ class ForecastsController < ApplicationController
   # GET /forecasts.json
   def index
     @forecasts = Forecast.all
+    @futures = Future.all
 
     # the mean
     sum = 0

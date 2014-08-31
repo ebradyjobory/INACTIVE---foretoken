@@ -1,9 +1,8 @@
-<h1>Listing futures</h1>
-
 <table>
   <thead>
     <tr>
-      <th>Future year</th>
+      <th>Future Year</th>
+      <th>Forcasted Value</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +11,7 @@
     <% @futures.each do |future| %>
       <tr>
         <td><%= future.future_year %></td>
+        <td><%= future.forcasted %></td>
         <td><%= link_to 'Show', future %></td>
         <td><%= link_to 'Edit', edit_future_path(future) %></td>
         <td><%= link_to 'Destroy', future, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -22,4 +22,6 @@
 
 <br>
 
-<%= link_to 'New Future', new_future_path %>
+<%= link_to 'New Future Data', new_future_path %>
+
+
