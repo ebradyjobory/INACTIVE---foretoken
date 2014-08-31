@@ -37,7 +37,31 @@ class ForecastsController < ApplicationController
     @b1 = @total_xxbar_ttbar / @total_ttbar_sq
     @b0 = @mean - ( @b1 * @tbar )
 
-    
+    sum_sse = 0
+    forecasts = Forecast.all
+    forecasts.each do |i|
+      sum_sse += i.x_xhatsq
+    end
+    @sse = sum_sse
+
+    sum_ssr = 0
+    forecasts = Forecast.all
+    forecasts.each do |i|
+      sum_ssr += i.xhat_xbarsq
+    end
+    @ssr = sum_ssr
+
+    sum_sst = 0
+    forecasts = Forecast.all
+    forecasts.each do |i|
+      sum_sst += i.x_xbarsq
+    end
+    @sst = sum_sst
+
+    # Calculating the regression R^2
+
+    @r2 = 1 - (@sse / @sst)
+
 
 
 

@@ -47,6 +47,38 @@ class Forecast < ActiveRecord::Base
 		(ttbar.abs)**2	
 	end
 
+	def b1
+		sum1 = 0
+		sum2 = 0
+		forecasts = Forecast.all
+		forecasts.each do |i|
+			sum1 += (i.xxbar_ttbar)
+			sum2 += (i.ttbar_sq)
+		end
+		sum1 / sum2
+	end
+
+	def b0
+		mean  - (b1*tbar)
+	end
+
+	def xhat
+	    b0 + (b1 * time)
+	end
+
+	def x_xhatsq
+		(revenue - xhat)**2
+	end
+
+	def xhat_xbarsq
+		(xhat - mean)**2	
+	end
+
+	def x_xbarsq
+		(revenue - mean)**2	
+	end
+
+
 
 
 
