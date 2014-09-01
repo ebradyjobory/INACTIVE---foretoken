@@ -1,12 +1,21 @@
 class Future < ActiveRecord::Base
 
-	def self.years
-		future_years = []
+	def self.revenues
+		revenues = []
 		futures = Future.all
 		futures.each do |i|
-			future_years << i.forcasted
+			revenues << i.forcasted
 		end
-		future_years	
+		revenues	
+	end
+
+	def self.future_years
+		years = []
+		futures = Future.all
+		futures.each do |i|
+			years << i.future_year
+		end
+		years	
 	end
 
 

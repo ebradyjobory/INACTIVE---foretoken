@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FcastApp</title>
+  <title>Data Forecasting</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true %>
   
@@ -11,16 +11,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<!-- <div class="navbar-wrapper">
-	<div class="container">
-		<div class="navbar navbar-inverse navbar-static-top"> -->
-			<div class="container">
-				<div class="row">
-					<%= yield %>
-			   <!--  </div>
-			 </div>
-		</div>
-	</div> -->
+
+<div class="container">
+    <div class="row">
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "foretoken", "#",  :class => "navbar-brand" %></li>
+          <li><%= link_to "About", '#' %></li>
+          <li><%= link_to "Home", '#' %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  		<%= yield %>
+
+  </div>	
 </div>
 
 

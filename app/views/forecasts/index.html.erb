@@ -1,6 +1,5 @@
-<h1>Listing forecasts</h1>
-
-<table class="col-md-11">
+<h2> Data Input </h2>
+<table class="col-md-11 table table-striped">
   <thead>
     <tr>
       <th>Year</th>
@@ -30,26 +29,28 @@
   </tbody>
 </table>
 <%= link_to 'Add New Data', new_forecast_path, :class => "col-md-2 btn btn-success" %>
+<!-- <table>
+  <tbody>
+  <th>Mean</th>
+    
 
-<div class="col-md-11">
+  </tbody>
+</table> -->
+
+<!-- <div class="col-md-11">
       <p>The mean of revenues is: <%= @mean %> <p>
       <p>The total of (x-xbar)(t-tbar) is: <%= @total_xxbar_ttbar %> <p>
-      <p>The total of t_tbar^2 is: <%= @total_ttbar_sq %> <p>
-
-      <div>
-        <h3>Regression</h3>
-        <p>The value of b1:<%= @b1 %><p>
-        <p>The value of b0:<%= @b0 %><p>
-      </div>
-</div>
-<div class="col-md-10">
-  <p>Your Simple Linear Regression equation is:<strong>m =<%= @b0 %>+( <%= @b1 %> )t</strong></p>
+      <p>The total of t_tbar^2 is: <%= @total_ttbar_sq %> <p> -->    
+     
+<div class="col-md-12">
+  <h3>Regression</h3>
+  <p>Your Simple Linear Regression equation: <strong>  m = <%= @b0 %>+( <%= @b1 %> )t</strong></p>
 </div>
 <br>
 <br>
 
 <div>
-  <table class="col-md-10">
+  <table class="col-md-10 table table-striped">
     <thead>
       <tr>
         <th>Year</th>
@@ -78,10 +79,10 @@
   </div>
 
   <div class="col-md-10">
-    <p>Your SSE value: <%= @sse %></p>
+<!--     <p>Your SSE value: <%= @sse %></p>
     <p>Your SSR value: <%= @ssr %></p>
-    <p>Your SST value: <%= @sst %></p>
-    <strong><p>The regression of this data <i>R^2</i>: <%= @r2 %></strong> % of total variation explained by regression (higher R^2 = better fit) </p>
+    <p>Your SST value: <%= @sst %></p> -->
+    <p>The regression of this data <i>R Squared</i>:  <strong><%= @r2 %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
  </div>
 
 <br>
@@ -91,22 +92,21 @@
   <%= render :template => "futures/index" %>
 </div>
 
-
 <script>
 $(document).ready(function() {
     var chart1 = new Highcharts.Chart({
         chart: {
-            renderTo: 'chart',
+            renderTo: 'chart-input',
         },
         title: {
-            text: 'Data Forecasting'
+            text: 'Data Input'
         },
         xAxis: {
-            categories: <%= Forecast.years.each { |i| i.inspect } %>,
+            categories: <%= Forecast.total_years.each { |i| i.inspect } %>,
             title: {
               text: "Time"
-                }
-            },   
+                },
+               },   
         yAxis: {
             title: {
                 text: 'Data'
@@ -114,17 +114,15 @@ $(document).ready(function() {
         },
         series: [{
             name: "Input",
-            data: <%= Forecast.revenues.each { |i| i.inspect} %>,
-            }, {
-            name: "Forcasted",
-            data: <%= Future.years.each { |i| i.inspect } %> 
+            data: <%= Forecast.total_revenues.each { |i| i.inspect} %>
+            
         }]
     });
 });
 </script>
 
-
-<div id="chart", class="col-md-10"></div>
+<h2 class="col-md-10">Output Chart</h2>
+<div id="chart-input", class="col-md-10"></div>
 
 
 

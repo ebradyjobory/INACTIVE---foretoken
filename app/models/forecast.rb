@@ -1,21 +1,32 @@
 class Forecast < ActiveRecord::Base
 
-	def self.revenues
-		revenues = []
-		forecasts = Forecast.all
-		forecasts.each do |i|
-			revenues << i.revenue
+	def self.total_revenues
+		actual_revenues = []
+	    forecasted_revenues = []
+
+		actuals = Forecast.all
+		actuals.each do |i|
+			actual_revenues << i.revenue
 		end
-		revenues
+		forecasted = Future.all
+		forecasted.each do |i|
+			forecasted_revenues << i.forcasted
+		end
+		total_revenues = actual_revenues + forecasted_revenues
 	end
 
-	def self.years
+	def self.total_years
 		years = []
+		future_years = []
 		forecasts = Forecast.all
 		forecasts.each do |i|
 			years << i.year
 		end
-		years
+		futures = Future.all
+		futures.each do |j|
+			future_years << j.future_year
+		end
+		total_years = years + future_years
 	end
 
 
