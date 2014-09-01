@@ -29,6 +29,47 @@ class Forecast < ActiveRecord::Base
 		total_years = years + future_years
 	end
 
+	def self.regression
+
+		forecasts = Forecast.all
+		revenues = []
+		forecasts.each do |i|
+			revenues << i.revenue
+		end		
+		sum = 0
+		revenues.each { |i| sum += i }	
+		mean = sum / revenues.length
+
+		sum2 = 0
+		ids = []
+		total = 0
+		forecasts = Forecast.all		
+		forecasts.each do |i|
+			ids << i.id
+		end
+		ids.each do |k|
+			sum2 += k
+		end	
+		tbar = sum2 / ids.length
+
+		sum3 = 0
+		sum4 = 0
+		forecasts = Forecast.all
+		forecasts.each do |i|
+			sum3 += (i.xxbar_ttbar)
+			sum4 += (i.ttbar_sq)
+		end
+		b1 = sum3 / sum4
+		b0 = mean  - (b1*tbar)
+		regression = []
+		t = 1
+		while t <= forecasts.size
+			regression <<  b0 + (b1*t)
+			t += 1
+		end
+		regression	
+	end
+
 
 
 	def mean
@@ -90,7 +131,7 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def b0
-		mean  - (b1*tbar)
+		b0 = mean  - (b1*tbar)
 	end
 
 	def xhat
