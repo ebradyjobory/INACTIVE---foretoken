@@ -64,11 +64,6 @@ class ForecastsController < ApplicationController
     @r2 = 1 - (@sse / @sst)
 
 
-
-
-
-
-
   end
   
 
@@ -91,29 +86,36 @@ class ForecastsController < ApplicationController
   def create
     @forecast = Forecast.new(forecast_params)
 
-    respond_to do |format|
+    # respond_to do |format|
       if @forecast.save
-        format.html { redirect_to @forecast, notice: 'Forecast was successfully created.' }
-        format.json { render :show, status: :created, location: @forecast }
+        flash[:notice] = "Data was created successfully"
+        redirect_to(:action => 'index')
+
+        # format.html { redirect_to @forecast, notice: 'Forecast was successfully created.' }
+        # format.json { render :index, status: :created, location: @forecast }
       else
-        format.html { render :new }
-        format.json { render json: @forecast.errors, status: :unprocessable_entity }
+        render('new')
+        # format.html { render :new }
+        # format.json { render json: @forecast.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # PATCH/PUT /forecasts/1
   # PATCH/PUT /forecasts/1.json
   def update
-    respond_to do |format|
+    # respond_to do |format|
       if @forecast.update(forecast_params)
-        format.html { redirect_to @forecast, notice: 'Forecast was successfully updated.' }
-        format.json { render :show, status: :ok, location: @forecast }
+        flash[:notice] = "Data was updated successfully"
+        redirect_to(:action => 'index')
+        # format.html { redirect_to @forecast, notice: 'Forecast was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @forecast }
       else
-        format.html { render :edit }
-        format.json { render json: @forecast.errors, status: :unprocessable_entity }
+        render('update')
+        # format.html { render :edit }
+        # format.json { render json: @forecast.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # DELETE /forecasts/1

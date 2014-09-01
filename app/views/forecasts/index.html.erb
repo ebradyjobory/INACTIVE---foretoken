@@ -1,49 +1,40 @@
-<h2> Data Input </h2>
-<table class="col-md-11 table table-striped">
-  <thead>
-    <tr>
-      <th>Year</th>
-      <th>Data</th>
-      <th>Time(t)</th>
-      <th>X - Xbar</th>
-      <th>t - tbar</th>
-      <th>(X - Xbar)(t - tbar)</th>
-      <th>(t - tbar)^2</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @forecasts.each do |forecast| %>
+
+<div class="input-area">
+  <h2> Data Input </h2>
+  <table class="col-md-11 table table-striped">
+    <thead>
       <tr>
-        <td><%= forecast.year %></td>
-        <td><%= forecast.revenue %></td>
-        <td><%= forecast.time %></td>
-        <td><%= forecast.xxbar %></td>
-        <td><%= forecast.ttbar %></td>
-        <td><%= forecast.xxbar_ttbar %></td>
-        <td><%= forecast.ttbar_sq %></td>
-        <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+        <th>Year</th>
+        <th>Data</th>
+        <th>Time(t)</th>
+        <th>X - Xbar</th>
+        <th>t - tbar</th>
+        <th>(X - Xbar)(t - tbar)</th>
+        <th>(t - tbar)^2</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Add New Data', new_forecast_path, :class => "col-md-2 btn btn-success" %>
-<!-- <table>
-  <tbody>
-  <th>Mean</th>
-    
-
-  </tbody>
-</table> -->
-
-<!-- <div class="col-md-11">
-      <p>The mean of revenues is: <%= @mean %> <p>
-      <p>The total of (x-xbar)(t-tbar) is: <%= @total_xxbar_ttbar %> <p>
-      <p>The total of t_tbar^2 is: <%= @total_ttbar_sq %> <p> -->    
-     
-<div class="col-md-12">
-  <h3>Regression</h3>
+    </thead>
+    <tbody>
+      <% @forecasts.each do |forecast| %>
+        <tr>
+          <td><%= forecast.year %></td>
+          <td><%= forecast.revenue %></td>
+          <td><%= forecast.time %></td>
+          <td><%= forecast.xxbar %></td>
+          <td><%= forecast.ttbar %></td>
+          <td><%= forecast.xxbar_ttbar %></td>
+          <td><%= forecast.ttbar_sq %></td>
+          <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
+          <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Add New Data', new_forecast_path, :class => "col-md-2 btn btn-success" , :id => "new-data" %>
+</div> <!-- .input-area -->
+        
+<div class="col-md-12 regression">
+  <h3>Regression Results</h3>
   <p>Your Simple Linear Regression equation: <strong>  m = <%= @b0 %>+( <%= @b1 %> )t</strong></p>
 </div>
 <br>
@@ -87,8 +78,8 @@
 
 <br>
 
-<div class="col-md-10">
-  <h3> Time data to be forcasted</h3>
+<div class="col-md-10 forecast-area">
+  <h3> Data to be forcasted</h3>
   <%= render :template => "futures/index" %>
 </div>
 
@@ -121,8 +112,10 @@ $(document).ready(function() {
 });
 </script>
 
-<h2 class="col-md-10">Output Chart</h2>
-<div id="chart-input", class="col-md-10"></div>
+<div class="output-area">
+  <h2 class="col-md-10 output-area">Output Chart</h2>
+  <div id="chart-input", class="col-md-10"></div>
+</div>
 
 
 

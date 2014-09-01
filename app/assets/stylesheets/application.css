@@ -14,11 +14,16 @@
  *= require_self
  */
 
-
-table, th{
-   
+table, th{ 
    text-align: center !important;
- 
 } 
+
+.input-area, .output-area {
+	margin-top: 50px;
+}
+
+.regression {
+	margin: 30px 0px 30px 0;
+}
 
 

@@ -15,4 +15,15 @@
 //= require turbolinks
 //= require_tree .
 
+$(document).ready(function(){
 
+	var newData = document.getElementById('new-data');
+
+
+	$(newData).on('hover', function(){
+
+		$(newData).hide();
+	});
+
+
+});
