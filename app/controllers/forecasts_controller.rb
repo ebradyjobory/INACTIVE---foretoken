@@ -1,19 +1,19 @@
 class ForecastsController < ApplicationController
-  before_action :set_forecast, only: [:show, :edit, :update, :destroy]
 
-  # GET /forecasts
-  # GET /forecasts.json
+  before_action :set_forecast, only: [:show, :edit, :update, :destroy]
+  before_action :check_data, only: [:index]
+
   def index
     @forecasts = Forecast.all
     @futures = Future.all
 
-    # the mean
+    # calculating the mean of revenues
     sum = 0
     @forecasts.each do |i|
       @revenue = i.revenue
       sum += @revenue
     end
-    @mean = sum / @forecasts.length
+    @mean = sum / @forecasts.length # mean
 
     total_ttbarsq = 0
     total_xxbar_ttbar = 0
@@ -35,6 +35,7 @@ class ForecastsController < ApplicationController
     end 
     @tbar = sum / ids.length
 
+    # b1 and b0 values
     @b1 = @total_xxbar_ttbar / @total_ttbar_sq
     @b0 = @mean - ( @b1 * @tbar )
 
@@ -43,83 +44,57 @@ class ForecastsController < ApplicationController
     forecasts.each do |i|
       sum_sse += i.x_xhatsq
     end
-    @sse = sum_sse
+    @sse = sum_sse # SSE
 
     sum_ssr = 0
     forecasts = Forecast.all
     forecasts.each do |i|
       sum_ssr += i.xhat_xbarsq
     end
-    @ssr = sum_ssr
+    @ssr = sum_ssr # SSR
 
     sum_sst = 0
     forecasts = Forecast.all
     forecasts.each do |i|
       sum_sst += i.x_xbarsq
     end
-    @sst = sum_sst
+    @sst = sum_sst # SST
 
-    # Calculating the regression R^2
-
+    # Calculating R^2 ( R^2 = 1 - (SSE / SST))
     @r2 = 1 - (@sse / @sst)
-
-
   end
   
 
-  # GET /forecasts/1
-  # GET /forecasts/1.json
   def show
   end
 
-  # GET /forecasts/new
   def new
     @forecast = Forecast.new
   end
 
-  # GET /forecasts/1/edit
   def edit
   end
 
-  # POST /forecasts
-  # POST /forecasts.json
+
   def create
     @forecast = Forecast.new(forecast_params)
-
-    # respond_to do |format|
       if @forecast.save
         flash[:notice] = "Data was created successfully"
         redirect_to(:action => 'index')
-
-        # format.html { redirect_to @forecast, notice: 'Forecast was successfully created.' }
-        # format.json { render :index, status: :created, location: @forecast }
       else
         render('new')
-        # format.html { render :new }
-        # format.json { render json: @forecast.errors, status: :unprocessable_entity }
       end
-    # end
   end
 
-  # PATCH/PUT /forecasts/1
-  # PATCH/PUT /forecasts/1.json
   def update
-    # respond_to do |format|
       if @forecast.update(forecast_params)
         flash[:notice] = "Data was updated successfully"
         redirect_to(:action => 'index')
-        # format.html { redirect_to @forecast, notice: 'Forecast was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @forecast }
       else
         render('update')
-        # format.html { render :edit }
-        # format.json { render json: @forecast.errors, status: :unprocessable_entity }
       end
-    # end
   end
 
-  # DELETE /forecasts/1
-  # DELETE /forecasts/1.json
   def destroy
     @forecast.destroy
     respond_to do |format|
@@ -129,12 +104,19 @@ class ForecastsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def check_data
+      @forecasts =  Forecast.all
+      if @forecasts.empty?
+        redirect_to(:action => 'new')
+      end
+      
+    end
+
     def set_forecast
       @forecast = Forecast.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def forecast_params
       params.require(:forecast).permit(:year, :revenue)
     end

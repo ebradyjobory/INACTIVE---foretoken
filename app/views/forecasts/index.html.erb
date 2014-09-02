@@ -6,11 +6,11 @@
       <tr>
         <th>Year</th>
         <th>Data</th>
-        <th class="coll">Time(t)</th>
-        <th class="coll">X - Xbar</th>
-        <th class="coll">t - tbar</th>
-        <th class="coll">(X - Xbar)(t - tbar)</th>
-        <th class="coll">(t - tbar)^2</th>
+        <th>Time(t)</th>
+        <th>X - Xbar</th>
+        <th>t - tbar</th>
+        <th>(X - Xbar)(t - tbar)</th>
+        <th>(t - tbar)^2</th>
       </tr>
     </thead>
     <tbody>
@@ -18,11 +18,11 @@
         <tr>
           <td><%= forecast.year %></td>
           <td><%= forecast.revenue %></td>
-          <td class="coll"><%= forecast.time %></td>
-          <td class="coll"><%= forecast.xxbar %></td>
-          <td class="coll"><%= forecast.ttbar %></td>
-          <td class="coll"><%= forecast.xxbar_ttbar %></td>
-          <td class="coll"><%= forecast.ttbar_sq %></td>
+          <td><%= forecast.time %></td>
+          <td><%= forecast.xxbar %></td>
+          <td><%= forecast.ttbar %></td>
+          <td><%= forecast.xxbar_ttbar %></td>
+          <td><%= forecast.ttbar_sq %></td>
           <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
           <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
         </tr>

@@ -17,10 +17,8 @@
 
 $(document).ready(function(){
 
-	$('.scene').on('click', function(){
-		$('.coll').show();
-
-
-	});
+	// $('.scene').on('click', function(){
+	// 	$('.coll').show();
+	// });
 
 });

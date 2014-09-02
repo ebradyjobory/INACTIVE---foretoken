@@ -1,33 +1,25 @@
 class FuturesController < ApplicationController
   before_action :set_future, only: [:show, :edit, :update, :destroy]
 
-  # GET /futures
-  # GET /futures.json
+
   def index
     @futures = Future.all
 
     @forecasts = Forecast.all
     @last_data = @forecasts.last
     @last_id =  @last_data.id
-
   end
 
-  # GET /futures/1
-  # GET /futures/1.json
   def show
   end
 
-  # GET /futures/new
   def new
     @future = Future.new
   end
 
-  # GET /futures/1/edit
   def edit
   end
 
-  # POST /futures
-  # POST /futures.json
   def create
     @future = Future.new(future_params)
 
@@ -42,8 +34,7 @@ class FuturesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /futures/1
-  # PATCH/PUT /futures/1.json
+
   def update
     respond_to do |format|
       if @future.update(future_params)
@@ -56,8 +47,7 @@ class FuturesController < ApplicationController
     end
   end
 
-  # DELETE /futures/1
-  # DELETE /futures/1.json
+
   def destroy
     @future.destroy
     respond_to do |format|
@@ -67,12 +57,11 @@ class FuturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_future
       @future = Future.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def future_params
       params.require(:future).permit(:future_year)
     end

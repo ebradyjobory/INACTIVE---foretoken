@@ -1,5 +1,9 @@
 class Forecast < ActiveRecord::Base
 
+	def input_data
+		input_data = Forecast.all
+	end
+
 	def self.total_revenues
 		actual_revenues = []
 	    forecasted_revenues = []
@@ -89,8 +93,12 @@ class Forecast < ActiveRecord::Base
 		revenue.to_f - mean.to_f
 	end
 
+	def timer(i)
+		input_data.index(i) + 1
+	end
+
 	def time
-		id
+		timer(input_data.find(id))
 	end
 
 	def tbar
