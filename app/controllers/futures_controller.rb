@@ -22,37 +22,29 @@ class FuturesController < ApplicationController
 
   def create
     @future = Future.new(future_params)
-
-    respond_to do |format|
       if @future.save
-        format.html { redirect_to @future, notice: 'Future was successfully created.' }
-        format.json { render :show, status: :created, location: @future }
+        flash[:notice] = "Data was created successfully"
+        redirect_to(:controller => 'forecasts', :action => 'index')  
       else
-        format.html { render :new }
-        format.json { render json: @future.errors, status: :unprocessable_entity }
-      end
+        render('edit')
     end
   end
 
 
   def update
-    respond_to do |format|
       if @future.update(future_params)
-        format.html { redirect_to @future, notice: 'Future was successfully updated.' }
-        format.json { render :show, status: :ok, location: @future }
+        flash[:notice] = 'Data was successfully updated.' 
+        redirect_to(:controller => 'forecasts', :action => 'index')
       else
-        format.html { render :edit }
-        format.json { render json: @future.errors, status: :unprocessable_entity }
+        render('edit')
       end
-    end
   end
 
 
   def destroy
-    @future.destroy
-    respond_to do |format|
-      format.html { redirect_to futures_url, notice: 'Future was successfully destroyed.' }
-      format.json { head :no_content }
+    if @future.destroy
+    flash[:notice] =  'Data was successfully destroyed.'
+    redirect_to(:controller => 'forecasts', :action => 'index')
     end
   end
 

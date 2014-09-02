@@ -1,34 +1,41 @@
-
+<% if !flash[:notice].blank? %>
+  <div class="col-md-5 bg-success">
+    <%= flash[:notice] %>
+  </div>
+<%end%>
+  
 <div class="input-area">
   <h2> Data Input </h2>
-  <table class="col-md-11 table table-striped">
-    <thead>
-      <tr>
-        <th>Year</th>
-        <th>Data</th>
-        <th>Time(t)</th>
-        <th>X - Xbar</th>
-        <th>t - tbar</th>
-        <th>(X - Xbar)(t - tbar)</th>
-        <th>(t - tbar)^2</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @forecasts.each do |forecast| %>
+  <div class="table-responsive">
+    <table class="col-md-11 table table-striped table-hover">
+      <thead>
         <tr>
-          <td><%= forecast.year %></td>
-          <td><%= forecast.revenue %></td>
-          <td><%= forecast.time %></td>
-          <td><%= forecast.xxbar %></td>
-          <td><%= forecast.ttbar %></td>
-          <td><%= forecast.xxbar_ttbar %></td>
-          <td><%= forecast.ttbar_sq %></td>
-          <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
-          <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+          <th>Year</th>
+          <th>Data</th>
+          <th>Time(t)</th>
+          <th>X - Xbar</th>
+          <th>t - tbar</th>
+          <th>(X - Xbar)(t - tbar)</th>
+          <th>(t - tbar)^2</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @forecasts.each do |forecast| %>
+          <tr>
+            <td><%= forecast.year %></td>
+            <td><%= forecast.revenue %></td>
+            <td><%= forecast.time %></td>
+            <td><%= forecast.xxbar %></td>
+            <td><%= forecast.ttbar %></td>
+            <td><%= forecast.xxbar_ttbar %></td>
+            <td><%= forecast.ttbar_sq %></td>
+            <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
+            <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   <%= link_to 'Add New Data', new_forecast_path, :class => "col-md-2 btn btn-success" , :id => "new-data" %>
 </div> <!-- .input-area -->
         
@@ -40,7 +47,7 @@
 <br>
 
 <div>
-  <table class="col-md-10 table table-striped">
+  <table class="col-md-10 table table-striped table-hover">
     <thead>
       <tr>
         <th>Year</th>

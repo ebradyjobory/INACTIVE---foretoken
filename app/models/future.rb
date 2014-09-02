@@ -1,5 +1,9 @@
 class Future < ActiveRecord::Base
 
+	def to_be_forcasted
+		to_be_forcasted = Future.all
+	end
+
 	def self.revenues
 		revenues = []
 		futures = Future.all
@@ -74,11 +78,20 @@ class Future < ActiveRecord::Base
 		last_entry_year_id = last_entry.id	
 	end
 
+	def timer(i)
+		forecasts = Forecast.all
+		last_entry = forecasts.last
+		time_on_last_item = last_entry.time
+		timer = to_be_forcasted.index(i) + 1 + time_on_last_item
+	end
+		
+
 	def time
-			futures = Future.all
-			years_diff = future_year - last_entry_year
-			id = last_entry_year_id + years_diff
-			time = id
+		timer(to_be_forcasted.find(id))
+			# futures = Future.all
+			# years_diff = future_year - last_entry_year
+			# id = last_entry_year_id + years_diff
+			# time = id
 	end
 
 	def forcasted

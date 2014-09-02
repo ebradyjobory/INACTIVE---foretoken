@@ -1,4 +1,4 @@
-<table class="col-md-11 table table-striped">
+<table class="col-md-11 table table-striped table-hover">
   <thead>
     <tr>
       <th>Future Year</th>
@@ -11,6 +11,7 @@
       <tr>
         <td><%= future.future_year %></td>
         <td><%= future.forcasted %></td>
+        <td><%= future.time %></td>
         <td><%= link_to 'Modify', edit_future_path(future), :class => "btn btn-primary" %></td>
         <td><%= link_to 'Delete', future, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
