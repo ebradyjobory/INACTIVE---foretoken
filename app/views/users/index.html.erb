@@ -1,0 +1,28 @@
+<h1>Users List</h1>
+<%= link_to('<< Back to main menu', admin_path) %>
+
+<%= link_to('Add New User', new_user_path) %>
+
+<div>
+	<table>
+		<tbody>
+			<tr>
+			 <th>Name</th>
+			 <th>Username</th>
+			 <th>Email</th>
+			 </tr>
+			 <% @users.each do |user| %>
+			 <tr>
+			 	<td><%= user.name %></td>
+			 	<td><%= user.username %></td>
+			 	<td><%= user.email %></td>
+			 	<td>
+		        <%= link_to 'Edit User', edit_user_path(user) %>
+		        <%= link_to 'Delete User', user, method: :delete, data: { conform: 'Are you sure?'} %>
+		        </td>
+			 </tr>
+		</tbody>
+	</table>
+	<%end%>
+
+</div>

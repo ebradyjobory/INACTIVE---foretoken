@@ -1,0 +1,22 @@
+<h1>Login</h1>
+
+<div>
+	<%= form_tag(:action => 'attempt_login') do |f| %>
+		<table>
+			<tbody>
+				<tr>
+					<td><%= label_tag(:username) %></td>
+					<td><%= text_field_tag(:username) %></td>
+				</tr>
+				<tr>
+					<td><%= label_tag(:password) %></td>
+					<td><%= text_field_tag(:password) %></td>
+				</tr>
+				<tr>
+					<td><%= submit_tag('Log In') %></td>
+				</tr>
+			</tbody>
+		</table>
+	<%end%>
+	<%= link_to 'Sign Up', new_user_path %>
+</div>

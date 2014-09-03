@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
-  resources :futures
 
+
+  get 'admin', :to  => "access#index"
+
+  resources :futures
+  resources :users
   resources :forecasts
 
-match "/", to: 'forecasts#index', via: 'get'
+  match "/", to: 'forecasts#index', via: 'get'
+
+  match ':controller(/:action(/:id))', :via => [:get, :post] 
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

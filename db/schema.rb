@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830163438) do
+ActiveRecord::Schema.define(version: 20140902200912) do
 
   create_table "forecasts", force: true do |t|
     t.integer  "year"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20140830163438) do
     t.integer  "future_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "first_name",      limit: 25
+    t.string   "last_name",       limit: 50
+    t.string   "email",           limit: 50
+    t.string   "password",        limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "username",        limit: 25
   end
 
 end
