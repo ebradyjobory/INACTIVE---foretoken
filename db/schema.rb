@@ -11,19 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902200912) do
+ActiveRecord::Schema.define(version: 20140904005908) do
 
   create_table "forecasts", force: true do |t|
     t.integer  "year"
     t.integer  "revenue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
+
+  add_index "forecasts", ["project_id"], name: "index_forecasts_on_project_id", using: :btree
 
   create_table "futures", force: true do |t|
     t.integer  "future_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "name",        limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forecast_id"
   end
 
   create_table "users", force: true do |t|

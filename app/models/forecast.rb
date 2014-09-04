@@ -1,5 +1,7 @@
 class Forecast < ActiveRecord::Base
 
+	belongs_to :project
+
 	def input_data
 		input_data = Forecast.all
 	end

@@ -1,5 +1,6 @@
 class ForecastsController < ApplicationController
 
+
   before_action :set_forecast, only: [:show, :edit, :update, :destroy]
   before_action :check_data, only: [:index]
 

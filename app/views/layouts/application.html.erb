@@ -25,13 +25,14 @@
       </div>
     </div>
   </nav>
-
-
-  		<%= yield %>
-
+  <% if !flash[:notice].blank? %>
+          <div class="notice">
+            <%= flash[:notice] %>
+          </div>
+  <%end%>
+  <%= yield %>
   </div>	
 </div>
-
 
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
