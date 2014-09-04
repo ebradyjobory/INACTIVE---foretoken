@@ -1,3 +1,4 @@
 class Project < ActiveRecord::Base
-	has_one :forecast
+	has_many :forecasts
+	belongs_to :user
 end

@@ -5,13 +5,13 @@ Rails.application.routes.draw do
 
   resources :projects
 
-  get 'user', :to  => "access#index"
+  get 'main', :to  => "access#index"
 
   resources :futures
   resources :users
   resources :forecasts
 
-  match "/", to: 'forecasts#index', via: 'get'
+  match "/", to: 'access#login', via: 'get'
 
   match ':controller(/:action(/:id))', :via => [:get, :post] 
 

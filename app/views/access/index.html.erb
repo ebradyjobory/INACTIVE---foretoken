@@ -1,8 +1,21 @@
-<h1> User Menu </h1>
+<h1>Main Menu</h1>
+
+<!--ToDO: List of projects of the ***signed in user*** -->
+
+<% @users.each do |user| %>
+	<% if user.username == session[:username] %>
+		<p>Welcome <%= user.name  %></p>
+		<% user.projects.each do |project| %>
+			<p>You have <%= pluralize(user.projects.size, 'project') %></p>
+			<p>Project Name: <%= project.name %></p>
+		<%end%>
+	<%end%>
+<%end%>	
+
+
 
 <div>
 	<%= link_to "Create new project",  new_project_path %>
-	<%= link_to "Open previous projects", projects_path %>
 	<%= link_to "Logout", :action => 'logout' %>
 </div>
 
