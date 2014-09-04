@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
 
+  resources :data
+
   resources :projects
 
-  get 'admin', :to  => "access#index"
+  get 'user', :to  => "access#index"
 
   resources :futures
   resources :users

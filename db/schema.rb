@@ -11,17 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904005908) do
+ActiveRecord::Schema.define(version: 20140904034449) do
+
+  create_table "data", force: true do |t|
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forecast_id"
+  end
+
+  add_index "data", ["project_id"], name: "index_data_on_project_id", using: :btree
 
   create_table "forecasts", force: true do |t|
     t.integer  "year"
     t.integer  "revenue"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
+    t.integer  "data_id"
   end
 
-  add_index "forecasts", ["project_id"], name: "index_forecasts_on_project_id", using: :btree
+  add_index "forecasts", ["data_id"], name: "index_forecasts_on_data_id", using: :btree
 
   create_table "futures", force: true do |t|
     t.integer  "future_year"
@@ -34,7 +43,12 @@ ActiveRecord::Schema.define(version: 20140904005908) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "forecast_id"
+    t.integer  "user_id"
+    t.integer  "data_id"
   end
+
+  add_index "projects", ["data_id"], name: "index_projects_on_data_id", using: :btree
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",      limit: 25
@@ -45,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140904005908) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "username",        limit: 25
+    t.integer  "project_id"
   end
 
 end
