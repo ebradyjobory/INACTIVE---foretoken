@@ -27,15 +27,14 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      @current_user  = User.find_by_username([session[:username]])
+       @current_user.projects << @project
+       flash[:notice] = 'Project was successfully created.' 
+       redirect_to(:controller => 'access', :action => 'index')
+        
+    else
+      render('new')
     end
   end
 

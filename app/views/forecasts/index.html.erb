@@ -1,6 +1,7 @@
   
 <div class="input-area">
   <h2> Data Input </h2>
+  <%= link_to 'Mian Menu', main_path %>
   <div class="table-responsive">
     <table class="col-md-11 table table-striped table-hover">
       <thead>
@@ -15,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @forecasts.each do |forecast| %>
+        <% @current_forecasts.each do |forecast| %>
           <tr>
             <td><%= forecast.year %></td>
             <td><%= forecast.revenue %></td>
@@ -41,34 +42,7 @@
 <br>
 <br>
 
-<div>
-  <table class="col-md-10 table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Year</th>
-        <th>Data</th>
-        <th>Time(t)</th>
-        <th>Xhat</th>
-        <th>(X - Xhat)^2</th>
-        <th>(Xhat - Xbar)^2</th>
-        <th>(X - Xbar)^2</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @forecasts.each do |forecast| %>
-        <tr>
-          <td><%= forecast.year %></td>
-          <td><%= forecast.revenue %></td>
-          <td><%= forecast.time %></td>
-          <td><%= forecast.xhat %></td>
-          <td><%= forecast.x_xhatsq %></td>
-          <td><%= forecast.xhat_xbarsq %></td>
-          <td><%= forecast.x_xbarsq %></td>
-        </tr>
-      <%end%>
-    </tbody>
-    </table>
-  </div>
+
 
   <div class="col-md-10">
 <!--     <p>Your SSE value: <%= @sse %></p>
@@ -106,7 +80,7 @@ $(document).ready(function() {
         },
         series: [{
             name: "Input",
-            data: <%= Forecast.total_revenues.each { |i| i.inspect} %>
+            // data:  Forecast.total_revenues.each { |i| i.inspect}
           }, {
             name: "Regression Line",
             data: <%= Forecast.regression.each { |i| i.inspect} %>

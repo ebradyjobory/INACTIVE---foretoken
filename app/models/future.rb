@@ -1,5 +1,7 @@
 class Future < ActiveRecord::Base
 
+	belongs_to :project
+
 	def to_be_forcasted
 		to_be_forcasted = Future.all
 	end

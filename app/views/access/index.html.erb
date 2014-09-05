@@ -1,18 +1,10 @@
 <h1>Main Menu</h1>
 
-<!--ToDO: List of projects of the ***signed in user*** -->
-
-<% @users.each do |user| %>
-	<% if user.username == session[:username] %>
-		<p>Welcome <%= user.name  %></p>
-		<% user.projects.each do |project| %>
-			<p>You have <%= pluralize(user.projects.size, 'project') %></p>
-			<p>Project Name: <%= project.name %></p>
-		<%end%>
-	<%end%>
+<p>Welcome <%= @current_user.name  %></p>
+<p>You have <%= pluralize(@current_user.projects.size, 'project') %></p>
+<% @current_user.projects.each do |project| %>
+	<p><%= link_to project.name, :controller => 'forecasts', :action => 'index', :id => project.id %></p>
 <%end%>	
-
-
 
 <div>
 	<%= link_to "Create new project",  new_project_path %>

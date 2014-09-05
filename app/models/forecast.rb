@@ -3,19 +3,18 @@ class Forecast < ActiveRecord::Base
 	belongs_to :project
 
 	def input_data
-		input_data = Forecast.all
+		$input_data = Forecast.all
+		$future_data = Future.all
 	end
 
 	def self.total_revenues
 		actual_revenues = []
 	    forecasted_revenues = []
 
-		actuals = Forecast.all
-		actuals.each do |i|
+		$input_data.each do |i|
 			actual_revenues << i.revenue
 		end
-		forecasted = Future.all
-		forecasted.each do |i|
+		$future_data.each do |i|
 			forecasted_revenues << i.forcasted
 		end
 		total_revenues = actual_revenues + forecasted_revenues
@@ -24,8 +23,7 @@ class Forecast < ActiveRecord::Base
 	def self.total_years
 		years = []
 		future_years = []
-		forecasts = Forecast.all
-		forecasts.each do |i|
+		$input_data.each do |i|
 			years << i.year
 		end
 		futures = Future.all
@@ -36,10 +34,8 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def self.regression
-
-		forecasts = Forecast.all
 		revenues = []
-		forecasts.each do |i|
+		$input_data.each do |i|
 			revenues << i.revenue
 		end		
 		sum = 0
@@ -48,9 +44,8 @@ class Forecast < ActiveRecord::Base
 
 		sum2 = 0
 		ids = []
-		total = 0
-		forecasts = Forecast.all		
-		forecasts.each do |i|
+		total = 0		
+		$input_data.each do |i|
 			ids << i.id
 		end
 		ids.each do |k|
@@ -60,8 +55,7 @@ class Forecast < ActiveRecord::Base
 
 		sum3 = 0
 		sum4 = 0
-		forecasts = Forecast.all
-		forecasts.each do |i|
+		$input_data.each do |i|
 			sum3 += (i.xxbar_ttbar)
 			sum4 += (i.ttbar_sq)
 		end
@@ -69,7 +63,7 @@ class Forecast < ActiveRecord::Base
 		b0 = mean  - (b1*tbar)
 		regression = []
 		t = 1
-		while t <= forecasts.size
+		while t <= $input_data.size
 			regression <<  b0 + (b1*t)
 			t += 1
 		end
@@ -79,10 +73,9 @@ class Forecast < ActiveRecord::Base
 
 
 	def mean
-		forecasts = Forecast.all
 		revenues = []
 
-		forecasts.each do |i|
+		$input_data.each do |i|
 			revenues << i.revenue
 		end		
 		
@@ -96,19 +89,18 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def timer(i)
-		input_data.index(i) + 1
+		$input_data.index(i) + 1
 	end
 
 	def time
-		timer(input_data.find(id))
+		timer($input_data.find(id))
 	end
 
 	def tbar
 		sum = 0
 		ids = []
-		total = 0
-		forecasts = Forecast.all		
-		forecasts.each do |i|
+		total = 0		
+		$input_data.each do |i|
 			ids << i.id
 		end
 		ids.each do |k|
@@ -132,8 +124,7 @@ class Forecast < ActiveRecord::Base
 	def b1
 		sum1 = 0
 		sum2 = 0
-		forecasts = Forecast.all
-		forecasts.each do |i|
+		$input_data.each do |i|
 			sum1 += (i.xxbar_ttbar)
 			sum2 += (i.ttbar_sq)
 		end
