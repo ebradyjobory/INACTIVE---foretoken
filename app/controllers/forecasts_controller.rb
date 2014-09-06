@@ -1,15 +1,15 @@
 class ForecastsController < ApplicationController
 
+  before_action :find_project
   before_action :set_forecast, only: [:show, :edit, :update, :destroy]
-  before_action :check_data, only: [:index]
+  
 
   def index
-    # @current_project = Project.find(params[:id])
-    # @current_forecasts = @current_project.forecasts
 
-   @forecasts = Forecast.all
+   @forecasts = @project.forecasts
    @futures = Future.all
 
+   if !@forecasts.empty?
    # calculating the mean of revenues
    sum = 0
    @forecasts.each do |i|
@@ -67,14 +67,16 @@ class ForecastsController < ApplicationController
    @r2 = 1 - (@sse / @sst)
    # @current_project = Project.find(params[:id])
    # @current_forecasts = @current_project.forecasts
+     end
   end
+
   
 
   def show
   end
 
   def new
-    @forecast = Forecast.new
+    @forecast = Forecast.new(:project_id => @project.id)
   end
 
   def edit
@@ -87,7 +89,7 @@ class ForecastsController < ApplicationController
         # @current_project = Project.find(6)
         # @current_project.forecasts << @forecast
         flash[:notice] = "Data was created successfully"
-        redirect_to(:action => 'index')
+        redirect_to('index', :project_id => @project.id)
       else
         render('new')
       end
@@ -96,7 +98,7 @@ class ForecastsController < ApplicationController
   def update
       if @forecast.update(forecast_params)
         flash[:notice] = "Data was updated successfully"
-        redirect_to(:action => 'index')
+        redirect_to(:action => 'index', :project_id => @project.id)
       else
         render('update')
       end
@@ -112,19 +114,17 @@ class ForecastsController < ApplicationController
 
   private
 
-    def check_data
-      @forecasts =  Forecast.all
-      if @forecasts.empty?
-        redirect_to(:action => 'new')
-      end
-      
-    end
-
     def set_forecast
-      @forecast = Forecast.find(params[:id])
+      @forecast = Forecast.where(:project_id => @project.id)
     end
 
     def forecast_params
       params.require(:forecast).permit(:year, :revenue)
+    end
+
+    def find_project
+      if params[:project_id]
+        @project = Project.find(params[:project_id])
+      end  
     end
 end

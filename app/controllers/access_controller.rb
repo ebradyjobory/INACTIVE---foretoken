@@ -5,7 +5,7 @@ class AccessController < ApplicationController
   def index
     @users = User.all
     @users.each do |user|
-      @current_user = user if user.username == session[:username] 
+    @current_user = user if user.username == session[:username] 
     end   
   end
 

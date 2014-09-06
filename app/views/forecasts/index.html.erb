@@ -24,14 +24,14 @@
             <td><%= forecast.ttbar %></td>
             <td><%= forecast.xxbar_ttbar %></td>
             <td><%= forecast.ttbar_sq %></td>
-            <td><%= link_to 'Modify', edit_forecast_path(forecast), :class => "btn btn-primary" %></td>
+            <td><%= link_to('Modify', {:action => 'edit', :project_id => @project.id }, :class => "btn btn-primary") %></td>
             <td><%= link_to 'Delete', forecast, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <%= link_to 'Add New Data', new_forecast_path, :class => "col-md-2 btn btn-success" , :id => "new-data" %>
+  <%= link_to 'Add New Data', new_forecast_path(:project_id => @project.id), :class => "col-md-2 btn btn-success" , :id => "new-data" %>
 </div> <!-- .input-area -->
         
 <div class="col-md-12 regression">

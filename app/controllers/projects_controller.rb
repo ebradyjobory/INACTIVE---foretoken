@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :set_project, only: [:edit, :update, :destroy]
+  # before_action :set_user
 
   # GET /projects
   # GET /projects.json
@@ -19,10 +20,6 @@ class ProjectsController < ApplicationController
    @project = Project.new
   end
 
-  # GET /projects/1/edit
-  def edit
-  end
-
   # POST /projects
   # POST /projects.json
   def create
@@ -38,27 +35,26 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
+        flash[:notice] = 'Project was successfully updated.' 
+        redirect_to(:controller => 'access', :action => 'index')
       else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        render('edit')
       end
-    end
   end
 
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
+    if @project.destroy
+      flash[:notice] ='Project was successfully destroyed.' 
+      redirect_to(:controller => 'access', :action => 'index')
     end
   end
 
@@ -67,6 +63,12 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
     end
+
+    # def set_user
+    #   if params[:user_id]
+    #     @user = User.find(params[:user_id])
+    #   end
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
