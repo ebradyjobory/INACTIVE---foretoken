@@ -1,7 +1,6 @@
-  
 <div class="input-area">
   <h2> Data Input </h2>
-  <%= link_to 'Mian Menu', main_path %>
+  <%= link_to 'Main Menu', main_path %>
   <div class="table-responsive">
     <table class="col-md-11 table table-striped table-hover">
       <thead>
@@ -16,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @current_forecasts.each do |forecast| %>
+        <% @forecasts.each do |forecast| %>
           <tr>
             <td><%= forecast.year %></td>
             <td><%= forecast.revenue %></td>
@@ -80,7 +79,7 @@ $(document).ready(function() {
         },
         series: [{
             name: "Input",
-            // data:  Forecast.total_revenues.each { |i| i.inspect}
+            data: <%= Forecast.total_revenues.each { |i| i.inspect} %>
           }, {
             name: "Regression Line",
             data: <%= Forecast.regression.each { |i| i.inspect} %>
